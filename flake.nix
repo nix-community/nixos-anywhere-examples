@@ -8,7 +8,7 @@
       system = "x86_64-linux";
       specialArgs = attrs;
       modules = [
-        ({modulesPath, ... }: {
+        ({modulesPath, config, lib, pkgs, ... }: {
           imports = [
             (modulesPath + "/installer/scan/not-detected.nix")
             (modulesPath + "/profiles/qemu-guest.nix")
@@ -28,6 +28,11 @@
             # change this to your ssh key
             "CHANGE"
           ];
+         
+          environment.systemPackages = map lib.lowPrio [
+            pkgs.curl
+            pkgs.gitMinimal
+          ];  
         })
       ];
     };
