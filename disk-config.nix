@@ -4,38 +4,31 @@
     device = dev;
     type = "disk";
     content = {
-      type = "table";
-      format = "gpt";
-      partitions = [
-        {
+      type = "gpt";
+      partitions = {
+        boot = {
           name = "boot";
-          start = "0";
-          end = "1M";
-          part-type = "primary";
-          flags = ["bios_grub"];
-        }
-        {
+          size = "1M";
+          type = "EF02";
+        };
+        esp = {
           name = "ESP";
-          start = "1MiB";
-          end = "100MiB";
-          bootable = true;
+          size = "500M";
+          type = "EF00";
           content = {
             type = "mdraid";
             name = "boot";
           };
-        }
-        {
+        };
+        root = {
           name = "root";
-          start = "100MiB";
-          end = "100%";
-          part-type = "primary";
-          bootable = true;
+          size = "100%";
           content = {
             type = "lvm_pv";
             vg = "pool";
           };
-        }
-      ];
+        };
+      };
     };
   });
   mdadm = {
