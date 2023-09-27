@@ -1,4 +1,4 @@
-{ modulesPath, ... }: {
+{ modulesPath, config, lib, pkgs, ... }: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
@@ -11,10 +11,16 @@
     efiInstallAsRemovable = true;
   };
   services.openssh.enable = true;
-  system.stateVersion = "23.11";
+
+  environment.systemPackages = map lib.lowPrio [
+    pkgs.curl
+    pkgs.gitMinimal
+  ];
 
   users.users.root.openssh.authorizedKeys.keys = [
     # change this to your ssh key
     "CHANGE"
   ];
+
+  system.stateVersion = "23.11";
 }
