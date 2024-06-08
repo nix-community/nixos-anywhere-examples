@@ -18,6 +18,19 @@
         modules = [
           disko.nixosModules.disko
           { disko.devices.disk.disk1.device = "/dev/vda"; }
+          {
+            # do not use DHCP, as DigitalOcean provisions IPs using cloud-init
+            networking.useDHCP = nixpkgs.lib.mkForce false;
+
+            services.cloud-init = {
+              enable = true;
+              network.enable = true;
+
+              # not strictly needed, just for good measure 
+              datasource_list = [ "DigitalOcean" ];
+              datasource.DigitalOcean = { };
+            };
+          }
           ./configuration.nix
         ];
       };
