@@ -61,7 +61,7 @@
       };
 
       # Slightly experimental: Like generic, but with nixos-facter (https://github.com/numtide/nixos-facter)
-      # nixos-anywhere --flake .#generic-nixos-facter --generate-hardware-config facter facter.json <hostname>
+      # nixos-anywhere --flake .#generic-nixos-facter --generate-hardware-config nixos-facter facter.json <hostname>
       nixosConfigurations.generic-nixos-facter = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
@@ -73,7 +73,7 @@
               if builtins.pathExists ./facter.json then
                 ./facter.json
               else
-                throw "Have you forgotten to run nixos-anywhere with `--generate-hardware-config nixos-generate-config ./facter.json`?";
+                throw "Have you forgotten to run nixos-anywhere with `--generate-hardware-config nixos-facter ./facter.json`?";
           }
         ];
       };
