@@ -32,10 +32,10 @@
             services.cloud-init = {
               enable = true;
               network.enable = true;
-
-              # not strictly needed, just for good measure
-              datasource_list = [ "DigitalOcean" ];
-              datasource.DigitalOcean = { };
+              settings = {
+                datasource_list = [ "ConfigDrive" ];
+                datasource.ConfigDrive = { };
+              };
             };
           }
           ./configuration.nix
