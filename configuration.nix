@@ -10,7 +10,6 @@
     (modulesPath + "/profiles/qemu-guest.nix")
     ./disk-config.nix
     ./modules/common.nix
-    ./modules/cloud.nix
   ];
   boot.loader.grub = {
     # no need to set devices, disko will add all devices that have a EF02 partition to the list already
@@ -29,5 +28,5 @@
     "CHANGE"
   ];
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "24.11";
 }
