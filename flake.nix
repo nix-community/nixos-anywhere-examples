@@ -5,11 +5,10 @@
   inputs.nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
 
   outputs =
-    {
-      nixpkgs,
-      disko,
-      nixos-facter-modules,
-      ...
+    { nixpkgs
+    , disko
+    , nixos-facter-modules
+    , ...
     }:
     {
       nixosConfigurations.hetzner-cloud = nixpkgs.lib.nixosSystem {
@@ -17,6 +16,7 @@
         modules = [
           disko.nixosModules.disko
           ./configuration.nix
+          ./disk-config.nix
           ./modules/cloud.nix
         ];
       };
@@ -25,7 +25,16 @@
         modules = [
           disko.nixosModules.disko
           ./configuration.nix
+          ./disk-config.nix
           ./modules/homelab.nix
+        ];
+      };
+      nixosConfigurations.homelab = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          disko.nixosModules.disko
+          ./configuration.nix
+          ./modules/fs/fw13.nix
         ];
       };
       # tested with 2GB/2CPU droplet, 1GB droplets do not have enough RAM for kexec

@@ -1,14 +1,12 @@
-{
-  modulesPath,
-  lib,
-  pkgs,
-  ...
+{ modulesPath
+, lib
+, pkgs
+, ...
 }:
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
-    ./disk-config.nix
     ./modules/common.nix
   ];
   boot.loader.grub = {
@@ -25,7 +23,7 @@
 
   users.users.root.openssh.authorizedKeys.keys = [
     # change this to your ssh key
-    "CHANGE"
+    #"CHANGE"
   ];
 
   system.stateVersion = "24.11";

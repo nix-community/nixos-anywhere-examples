@@ -27,11 +27,10 @@
                 mountOptions = [ "umask=0077" ];
               };
             };
-            encryptedSwap = {
+            swapfs = {
               size = "32G";
               content = {
                 type = "swap";
-                randomEncryption = true;
                 priority = 100; # prefer to encrypt as long as we have space for it
               };
             };
@@ -44,17 +43,17 @@
                 #passwordFile = "/tmp/secret.key"; # Interactive
                 settings = {
                   allowDiscards = true;
-                  keyFile = "/tmp/secret.key";
+                  #keyFile = "/tmp/secret.key";
                 };
-                additionalKeyFiles = [ "/tmp/additionalSecret.key" ];
+                #additionalKeyFiles = [ "/tmp/additionalSecret.key" ];
                 content = {
                   type = "btrfs";
                   extraArgs = [ "-f" ];
                   subvolumes = {
-                    # this should only be mounted if on fedora
-                    # how do i not mount this automatically
                     "root_fedora" = {
-                      mountpoint = "/";
+                      # this should only be mounted if on fedora
+                      # how do i not mount this automatically
+                      #mountpoint = "/";
                       mountOptions = [
                         "compress=zstd"
                         "noatime"
