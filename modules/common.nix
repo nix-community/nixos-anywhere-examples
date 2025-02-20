@@ -1,10 +1,15 @@
-{ config, pkgs, lib }: {
-  services = {
-    sudo = {
+{ modulesPath
+, lib
+, pkgs
+, ...
+}: {
+#{ config, pkgs, lib }: {
+  security.sudo = {
       enable = true;
       execWheelOnly = true;
       wheelNeedsPassword = false;
     };
+  services = {
     openssh = {
       enable = true;
       settings = {
