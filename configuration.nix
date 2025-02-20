@@ -12,7 +12,7 @@
   ];
   boot.loader.grub = {
     # no need to set devices, disko will add all devices that have a EF02 partition to the list already
-    splashImage = "./assets/tatami.jpg";
+    splashImage = ./assets/tatami.jpg;
     device = "/dev/nvme0n1";
     enable = true;
     efiSupport = true;

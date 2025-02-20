@@ -3,6 +3,10 @@
 , pkgs
 , ...
 }: {
+  nixpkgs.config = {
+    allowUnfree = true;
+    allowBroken = false;
+  };
   #{ config, pkgs, lib }: {
   security.sudo = {
     enable = true;

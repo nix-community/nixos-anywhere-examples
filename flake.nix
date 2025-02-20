@@ -5,6 +5,7 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixstable.url = "github:nixos/nixpkgs/nixos-24.11";
     nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -17,7 +18,7 @@
     , disko
     , nixos-facter-modules
     , ...
-    }:
+    }@inputs:
     {
       nixosConfigurations.hetzner-cloud = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -39,6 +40,7 @@
       };
       nixosConfigurations.framework = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
         modules = [
           disko.nixosModules.disko
           ./configuration.nix
@@ -48,7 +50,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.watashi = import ./conf/home.nix;
+            home-manager.users.lain = import ./conf/home.nix;
           }
         ];
       };

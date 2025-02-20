@@ -3,18 +3,19 @@
 { modulesPath
 , lib
 , pkgs
+, inputs
 , ...
 }: {
 
   networking = {
     networkmanager.enable = true;
-    hostname = "smolfw13";
+    hostName = "smolfw13";
   };
   hardware = {
     bluetooth = {
       enable = true;
       powerOnBoot = false;
-      package = pkg.bluez;
+      package = pkgs.bluez;
     };
   };
   users = {
@@ -26,8 +27,10 @@
       extraGroups = [
         "wheel"
       ];
-      packages =
-        (with pkgs; [
+          shell = pkgs.zsh;
+      isNormalUser = true;
+      openssh.authorizedKeys.keyFiles = let ssh_keys = (builtins.fetchurl { url = "https://github.com/SmolPatches.keys"; sha256 = "1kdpxy35g3gx850pj6v5450bv59pbn3nr5vkbik7csjp7br7nvn2"; }); in [ ssh_keys ]; # point key files to the thing in nix_store
+      packages = with pkgs; [
           zip
           unzip
           p7zip
@@ -36,11 +39,6 @@
           tradingview
           killall
           pulsemixer
-        ])
-          shell = pkgs.zsh;
-      isNormalUser = true;
-      openssh.authorizedKeys.keyFiles = let ssh_keys = (builtins.fetchurl { url = "https://github.com/SmolPatches.keys"; sha256 = "1kdpxy35g3gx850pj6v5450bv59pbn3nr5vkbik7csjp7br7nvn2"; }); in [ ssh_keys ]; # point key files to the thing in nix_store
-      packages = with pkgs; [
         eza
         ssh-to-age
       ];
@@ -67,15 +65,19 @@
     man-pages-posix
   ] ++ [ ripgrep fd tree file binwalk bat ] ++
   [ tcpdump nmap netcat-openbsd lsof dig tshark ]; # network monitoring
-  fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "FiraCode" "CascadiaCode" "FiraMono" "AnonymousPro" ]; })
-  ];
+  fonts.packages = (with pkgs.nerd-fonts; [
+    fira-code caskaydia-mono fira-mono commit-mono ]);
   services = {
+    xserver = {
+      enable = true;
+    };
+    displayManager = {
     ly = {
       enable = true;
       settings = {
         vi_mode = true;
       };
+    };
     };
     blueman.enable = true;
     dbus.enable = true;
@@ -101,6 +103,7 @@
     waybar.enable = true;
     hyprland = {
       # use hyprland from flake
+      #package = inputs.nixstable.legacyPackages."x86_64-linux".hyprland;
       package = inputs.nixstable.legacyPackages."x86_64-linux".hyprland;
       enable = true;
       xwayland = {
@@ -115,7 +118,6 @@
     };
   };
   environment = {
-    noXlibs = true;
     variables = {
       GTK_THEME = "Dracula:dark";
     };
