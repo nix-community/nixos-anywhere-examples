@@ -17,10 +17,16 @@
         content = {
           type = "gpt";
           partitions = {
+          boot = {
+            name = "boot";
+            size = "1M";
+            type = "EF02";
+          };
             ESP = {
               size = "1G";
               type = "EF00";
               content = {
+                extraArgs = ["-nBOOT" "-F32"];
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
@@ -40,7 +46,6 @@
                 type = "luks";
                 name = "crypted";
                 # disable settings.keyFile if you want to use interactive password entry
-                #passwordFile = "/tmp/secret.key"; # Interactive
                 settings = {
                   allowDiscards = true;
                   #keyFile = "/tmp/secret.key";
@@ -48,9 +53,9 @@
                 #additionalKeyFiles = [ "/tmp/additionalSecret.key" ];
                 content = {
                   type = "btrfs";
-                  extraArgs = [ "-f" ];
+                  extraArgs = [ "-f"];
                   subvolumes = {
-                    "root_fedora" = {
+                    "/root_fedora" = {
                       # this should only be mounted if on fedora
                       # how do i not mount this automatically
                       #mountpoint = "/";
@@ -60,7 +65,7 @@
                       ];
                     };
                     # this should only be mounted if on nixos
-                    "root_nixos" = {
+                    "/root_nixos" = {
                       mountpoint = "/";
                       mountOptions = [
                         "compress=zstd"
