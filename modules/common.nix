@@ -3,13 +3,18 @@
 , pkgs
 , ...
 }: {
-#{ config, pkgs, lib }: {
+  #{ config, pkgs, lib }: {
   security.sudo = {
-      enable = true;
-      execWheelOnly = true;
-      wheelNeedsPassword = false;
-    };
+    enable = true;
+    execWheelOnly = true;
+    wheelNeedsPassword = false;
+  };
   services = {
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+    };
+    automatic-timezoned.enable = true;
     openssh = {
       enable = true;
       settings = {

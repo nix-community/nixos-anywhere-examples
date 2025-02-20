@@ -17,16 +17,16 @@
         content = {
           type = "gpt";
           partitions = {
-          boot = {
-            name = "boot";
-            size = "1M";
-            type = "EF02";
-          };
+            boot = {
+              name = "boot";
+              size = "1M";
+              type = "EF02";
+            };
             ESP = {
               size = "1G";
               type = "EF00";
               content = {
-                extraArgs = ["-nBOOT" "-F32"];
+                extraArgs = [ "-nBOOT" "-F32" ];
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
@@ -53,7 +53,7 @@
                 #additionalKeyFiles = [ "/tmp/additionalSecret.key" ];
                 content = {
                   type = "btrfs";
-                  extraArgs = [ "-f"];
+                  extraArgs = [ "-f" ];
                   subvolumes = {
                     "/root_fedora" = {
                       # this should only be mounted if on fedora

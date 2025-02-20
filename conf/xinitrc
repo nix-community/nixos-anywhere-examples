@@ -1,0 +1,4 @@
+feh --bg-scale ~/.config/wallpapers/sunmoon.jpg &
+xrandr --output DP-0 --mode 2560x1440
+xrandr --output HDMI-0 --mode 2560x1440
+exec cwm
