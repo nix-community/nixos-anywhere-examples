@@ -27,19 +27,19 @@
       extraGroups = [
         "wheel"
       ];
-          shell = pkgs.zsh;
+      shell = pkgs.zsh;
       isNormalUser = true;
       openssh.authorizedKeys.keyFiles = let ssh_keys = (builtins.fetchurl { url = "https://github.com/SmolPatches.keys"; sha256 = "1kdpxy35g3gx850pj6v5450bv59pbn3nr5vkbik7csjp7br7nvn2"; }); in [ ssh_keys ]; # point key files to the thing in nix_store
       packages = with pkgs; [
-          obsidian
-          zip
-          unzip
-          p7zip
-          binutils
-          helix
-          tradingview
-          killall
-          pulsemixer
+        obsidian
+        zip
+        unzip
+        p7zip
+        binutils
+        helix
+        tradingview
+        killall
+        pulsemixer
         eza
         ssh-to-age
       ];
@@ -63,24 +63,31 @@
     usbutils
     pciutils
     man-pages
+    powertop # not using auto tune because tlp does it
     man-pages-posix
   ] ++ [ ripgrep fd tree file binwalk bat ] ++
   [ tcpdump nmap netcat-openbsd lsof dig tshark ]; # network monitoring
   fonts.packages = (with pkgs.nerd-fonts; [
-    fira-code caskaydia-mono fira-mono commit-mono ]);
+    fira-code
+    caskaydia-mono
+    fira-mono
+    commit-mono
+  ]);
   services = {
     xserver = {
       #videoDrivers = [ "amdgpu" ];
-      #enable = true;
+      desktopManager.gnome.enable = true;
+      enable = true;
     };
     displayManager = {
-    ly = {
-      enable = true;
-      settings = {
-        vi_mode = true;
+      ly = {
+        enable = true;
+        settings = {
+          vi_mode = true;
+        };
       };
     };
-    };
+    tlp.enable = true;
     blueman.enable = true;
     dbus.enable = true;
     pipewire = {
@@ -107,7 +114,7 @@
       # use hyprland from flake
       enable = true;
       xwayland = {
-        enable = false;
+        enable = true; #for steam
       };
     };
     steam = {

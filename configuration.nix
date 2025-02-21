@@ -14,7 +14,8 @@
   boot.loader.grub = {
     # no need to set devices, disko will add all devices that have a EF02 partition to the list already
     splashImage = ./assets/tatami.jpg;
-    device = "/dev/nvme0n1";
+    device = "nodev";
+    useOSProber = true;
     enable = true;
     efiSupport = true;
     efiInstallAsRemovable = true;
