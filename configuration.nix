@@ -13,7 +13,9 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   boot.loader.grub = {
     # no need to set devices, disko will add all devices that have a EF02 partition to the list already
-    splashImage = ./assets/tatami.jpg;
+    #splashImage = ./assets/lain.png;
+    splashImage = ./assets/kami.png;
+    gfxmodeBios = "2880x1920";
     device = "nodev";
     useOSProber = true;
     enable = true;
