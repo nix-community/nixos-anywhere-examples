@@ -1,6 +1,6 @@
 [font]
-normal = { family = "Caskaydia Cove Nerd Font", style = "Regular" }
-italic= { family = "Caskaydia Cove Nerd Font Propo", style = "Italic" }
-bold_italic = { family = "Caskaydia Cove Nerd Font Propo", style = "Semibold Italic" }
-bold = { family = "Caskaydia Cove Nerd Font", style = "Bold" }
+normal = { family = "Caskaydia Mono Nerd Font", style = "Regular" }
+italic= { family = "Caskaydia Mono Nerd Font Propo", style = "Italic" }
+bold_italic = { family = "Caskaydia Mono Nerd Font Propo", style = "Semibold Italic" }
+bold = { family = "Caskaydia Mono Nerd Font", style = "Bold" }
 size = 15
