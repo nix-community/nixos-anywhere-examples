@@ -146,6 +146,7 @@ in
       "zathura" = { source = ./zathura; };
       "tmux" = { source = ./tmux; };
       "helix" = { source = ./helix; };
+      "waybar" = { source = ./waybar; };
       "alacritty" = { source = ./alacritty; };
     };
   };

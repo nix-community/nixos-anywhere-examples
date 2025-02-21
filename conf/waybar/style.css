@@ -1,0 +1,38 @@
+* {
+	border: none;
+	border-radius: 0;
+	font-family: Caskaydia Nerd Font Mono;
+	font-size: 14px;
+	min-height: 24px;
+}
+
+#workspaces {
+	margin-top: 8px;
+	margin-left: 26px;
+	margin-bottom: 0;
+	border-radius: 26px;
+	background: #282a36;
+	transition: none;
+}
+
+#workspaces button {
+	transition: none;
+	color: #f8f8f2;
+	background: transparent;
+	font-size: 16px;
+}
+
+#workspaces button.focused {
+	color: #9aedfe;
+}
+
+#workspaces button.active {
+	background: red;
+}
+
+#workspaces button:hover {
+	transition: none;
+	box-shadow: inherit;
+	text-shadow: inherit;
+	color: #ff79c6;
+}
