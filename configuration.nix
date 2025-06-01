@@ -3,7 +3,7 @@
   lib,
   pkgs,
   ...
-}:
+} @ args:
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -26,7 +26,7 @@
   users.users.root.openssh.authorizedKeys.keys = [
     # change this to your ssh key
     "CHANGE"
-  ];
+  ] ++ (args.extraPublicKeys or []); # this is used for unit-testing this module and can be removed.
 
   system.stateVersion = "24.05";
 }
