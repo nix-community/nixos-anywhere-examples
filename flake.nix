@@ -23,25 +23,9 @@
       nixosConfigurations.digitalocean = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ({ modulesPath, ... }:{
-            imports = [
-              disko.nixosModules.disko
-              # use the DigitalOcean cloud-init datasource
-              "${modulesPath}/virtualisation/digital-ocean-config.nix"
-            ];
-            disko.devices.disk.disk1.device = "/dev/vda";
-            # do not use DHCP, as DigitalOcean provisions IPs using cloud-init
-            networking.useDHCP = nixpkgs.lib.mkForce false;
-
-            services.cloud-init = {
-              enable = true;
-              network.enable = true;
-              settings = {
-                datasource_list = [ "DigitalOcean" ];
-                datasource.DigitalOcean = { };
-              };
-            };
-          })
+          ./digitalocean.nix
+          disko.nixosModules.disko
+          { disko.devices.disk.disk1.device = "/dev/vda"; }
           ./configuration.nix
         ];
       };
