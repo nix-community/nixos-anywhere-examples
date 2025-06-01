@@ -23,10 +23,11 @@
     pkgs.gitMinimal
   ];
 
-  users.users.root.openssh.authorizedKeys.keys = [
+  users.users.root.openssh.authorizedKeys.keys =
+  [
     # change this to your ssh key
-    "CHANGE"
-  ] ++ (args.extraPublicKeys or []); # this is used for unit-testing this module and can be removed.
+    "# CHANGE"
+  ] ++ (args.extraPublicKeys or []); # this is used for unit-testing this module and can be removed if not needed
 
   system.stateVersion = "24.05";
 }
